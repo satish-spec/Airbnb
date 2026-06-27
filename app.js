@@ -6,15 +6,13 @@ console.log(process.env.SECRET);
 const express= require("express");
 const app= express();
 const mongoose= require("mongoose");
-// const Listing= require("./models/listing.js");
+
 const path= require("path");
 const methodOverride= require("method-override");
 const ejsMate= require("ejs-mate");
-// const wrapAsync = require("./utils/WrapAsync.js");
+
 const ExpressError = require("./utils/ExpressError.js");
-// const {listingSchema, reviewSchema} = require("./schema.js");
-// const Review = require("./models/review.js");
-// const review = require("./models/review.js"); 
+
 const session = require("express-session");
 const MongoStore = require('connect-mongo').default;
 const flash = require("connect-flash");
@@ -71,9 +69,7 @@ async function main() {
     await mongoose.connect(dbUrl);
 }
 
-// app.get("/", (req,res) => {
-//     res.send("Hi, I am root");
-// });
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -92,23 +88,15 @@ passport.deserializeUser(User.deserializeUser()); //user info. ko unstored karwa
 //global middleware i.e run on every request
 //return an array of messages
 //After reading deleted from session
-app.use((req, res, next) => {//middleware to make data available to all your views automatically
-    res.locals.success = req.flash("success");//data stored here is available in EJS(any view)
-    res.locals.error = req.flash("error");//No need to manually send it in res.render()
-    res.locals.currUser = req.user;//bcz ejs template me req.user assessible nahi kar sakte
-    // console.log(res.locals.success);
+app.use((req, res, next) => {      //middleware to make data available to all your views automatically
+    res.locals.success = req.flash("success");     //data stored here is available in EJS(any view)
+    res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
+   
     next();
 })
 
-// app.get("/demouser", async(req, res) => {
-//     let fakeUser = new User({
-//         email: "student@gmail.com",
-//         username: "delta-student"
-//     });
-//     let registeredUser = await User.register(fakeUser, "password");  //User ka jo register method 
-//     //hai ye database ke ander automatically hamara jo fake user hai usko save karwa dega
-//     res.send(registeredUser);
-// }) 
+
 
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
@@ -119,9 +107,9 @@ app.all(/.*/, (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    // res.send("something went wrong")
+    
     let {statusCode=500, message="Something went wrong"} = err; 
-    // res.status(statusCode).send(message);
+    
     res.status(statusCode).render("error.ejs", {err});
 });
 

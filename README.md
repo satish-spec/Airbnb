@@ -16,6 +16,15 @@ Features
   > RESTful APIs with robust backend validation
   > Custom error handling and input validation
 
+Tech Stack
+  Node.js
+  Express.js
+  MongoDB
+  Mongoose
+  EJS
+  Bootstrap
+  Passport.js
+  Cloudinary
 
 
 

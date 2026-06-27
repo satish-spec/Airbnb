@@ -1,3 +1,4 @@
+```
 Airbnb Clone
 
 A full-stack Airbnb Clone that enables users to discover, list, and book vacation rentals with a modern, 
@@ -39,3 +40,5 @@ Airbnb-Clone/
 ├── app.js
 ├── package.json
 └── README.md
+
+```
